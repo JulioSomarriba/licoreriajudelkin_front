@@ -1,0 +1,22 @@
+.navbar-color {
+  background-color: #ff5733; /* Color de fondo personalizado */
+}
+
+.link-unstyled {
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Usa el color heredado (generalmente, el color predeterminado) */
+}
+
+.center-button {
+  text-align: center;
+}
+
+.custom-button{
+  background-color: #ff5733;
+  color: aliceblue;
+  transition: none;
+  &:hover{
+    background-color: aliceblue;
+    color: aqua;
+  }
+}
