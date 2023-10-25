@@ -3,14 +3,11 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Producto() {
+function Detalleventa() {
 
   // Crear un estado para cada campo del formulario
-  const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState('');
   const [precio, setPrecio] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [porcentaje_alcohol, setPorcentaje_alcohol] = useState('');
 
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
@@ -18,16 +15,13 @@ function Producto() {
 
     // Crear un objeto con los datos del formulario
     const formData = {
-      nombre,
       cantidad,
       precio,
-      descripcion,
-      porcentaje_alcohol,
     };
 
     try {
       // Realizar una solicitud HTTP al backend para enviar los datos
-      const response = await fetch('http://localhost:5000/crud/createproducto', {
+      const response = await fetch('http://localhost:5000/crud/createdetalleventa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,13 +33,10 @@ function Producto() {
         // El registro se creó exitosamente
         alert('Registro exitoso');
         // Reiniciar los campos del formulario
-        setNombre('');
         setCantidad('');
         setPrecio('');
-        setDescripcion('');
-        setPorcentaje_alcohol('');
       } else {
-        alert('Error al registrar el producto');
+        alert('Error al registrar el detalle dela venta');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -60,20 +51,9 @@ function Producto() {
       <Container>
         <Card className="mt-3">
           <Card.Body>
-            <Card.Title>Registro de Productos</Card.Title>
+            <Card.Title>Registrar Detalle de venta</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>
               <Row className="g-3">
-
-                <Col sm="6" md="6" lg="6">
-                  <FloatingLabel controlId="nombre" label="Nombre">
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingrese el nombre del producto"
-                      value={nombre}
-                      onChange={(e) => setNombre(e.target.value)}
-                    />
-                  </FloatingLabel>
-                </Col>
 
                 <Col sm="6" md="6" lg="6">
                   <FloatingLabel controlId="cantidad" label="Cantidad">
@@ -86,35 +66,13 @@ function Producto() {
                   </FloatingLabel>
                 </Col>
 
-                <Col sm="12" md="6" lg="6">
+                <Col sm="6" md="6" lg="6">
                   <FloatingLabel controlId="precio" label="Precio">
-                    <Form.Control 
-                      type="number" 
+                    <Form.Control
+                      type="number"
                       placeholder="Ingrese el precio"
                       value={precio}
-                      onChange={(e) => setPrecio(e.target.value)} 
-                    />
-                  </FloatingLabel>
-                </Col>
-
-                <Col sm="12" md="12" lg="6">
-                  <FloatingLabel controlId="porcentaje_alcohol" label="Porcentaje de alcohol">
-                    <Form.Control 
-                      type="number" 
-                      placeholder="Ingrese el porcentaje de alcohol" 
-                      value={porcentaje_alcohol}
-                      onChange={(e) => setPorcentaje_alcohol(e.target.value)}
-                    />
-                  </FloatingLabel>
-                </Col>
-
-                <Col sm="12" md="6" lg="12">
-                  <FloatingLabel controlId="descripcion" label="Descripciòn">
-                    <Form.Control 
-                      type="text" 
-                      placeholder="Ingrese la descripcion"
-                      value={descripcion}
-                      onChange={(e) => setDescripcion(e.target.value)} 
+                      onChange={(e) => setPrecio(e.target.value)}
                     />
                   </FloatingLabel>
                 </Col>
@@ -134,4 +92,4 @@ function Producto() {
   );
 }
 
-export default Producto;
+export default Detalleventa;

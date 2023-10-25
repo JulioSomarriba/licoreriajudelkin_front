@@ -90,7 +90,7 @@ function cliente() {
                   <FloatingLabel controlId="direccion" label="direccion">
                     <Form.Control 
                       type="text" 
-                      placeholder="Ingrese numero de telefono"
+                      placeholder="Ingrese direccion"
                       value={direccion}
                       onChange={(e) => setdireccion(e.target.value)} 
                     />

@@ -28,9 +28,15 @@ function Header() {
                 <Link to="/" className="link-unstyled">Inicio</Link>
               </Nav.Link>
 
-              <Nav.Link>
-                <Link to="/about" className="link-unstyled">Informacion</Link>
-              </Nav.Link>
+              <NavDropdown title="Empleados" id="Empleado">
+                <NavDropdown.Item>
+                  <Link to="/Empleado" className="link-unstyled">Registrar Empleado</Link>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item>
+                  <Link to="/EmpleadoList" className="link-unstyled">Listar Empleados</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
 
               <NavDropdown title="Clientes" id="clientes">
                 <NavDropdown.Item>
@@ -38,17 +44,47 @@ function Header() {
                 </NavDropdown.Item>
 
                 <NavDropdown.Item>
-                  <Link to="/actualizar-cliente" className="link-unstyled">Listar Clientes</Link>
+                  <Link to="/ClienteList" className="link-unstyled">Listar Clientes</Link>
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown title="Docentes" id="docentes">
+              <NavDropdown title="Productos" id="productos">
                 <NavDropdown.Item>
-                  <Link to="/teacher" className="link-unstyled">Registrar Docente</Link>
+                  <Link to="/producto" className="link-unstyled">Registrar Productos</Link>
                 </NavDropdown.Item>
 
                 <NavDropdown.Item>
-                  <Link to="/teacherList" className="link-unstyled">Listar Docentes</Link>
+                  <Link to="/productolist" className="link-unstyled">Listar Productos</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown title="Ventas" id="Venta">
+                <NavDropdown.Item>
+                  <Link to="/Venta" className="link-unstyled">Registro de Venta</Link>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item>
+                  <Link to="/VentaList" className="link-unstyled">Listar Ventas</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown title="Detalle de venta" id="Detalleventa">
+                <NavDropdown.Item>
+                  <Link to="/Detalleventa" className="link-unstyled">Registrar Detalle de venta</Link>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item>
+                  <Link to="/DetalleventaList" className="link-unstyled">Listar Detalle de venta</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown title="Marcas" id="Marca">
+                <NavDropdown.Item>
+                  <Link to="/Marca" className="link-unstyled">Registrar Marca</Link>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item>
+                  <Link to="/MarcaList" className="link-unstyled">Listar Marcas</Link>
                 </NavDropdown.Item>
               </NavDropdown>
 
@@ -86,18 +122,19 @@ function Header() {
               <NavDropdown.Item>
                 <Link to="/cliente" className="link-unstyled">Registrar Cliente</Link>
               </NavDropdown.Item>
+              
               <NavDropdown.Item>
                 <Link to="/actualizar-cliente" className="link-unstyled">Listar Clientes</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="Docentes" id="docentes">
+            <NavDropdown title="Productos" id="productos">
               <NavDropdown.Item>
-                <Link to="/teacher" className="link-unstyled">Registrar Docente</Link>
+                <Link to="/productos" className="link-unstyled">Registrar Productos</Link>
               </NavDropdown.Item>
 
               <NavDropdown.Item>
-                <Link to="/teacherList" className="link-unstyled">Listar Docentes</Link>
+                <Link to="/actualizar-productos" className="link-unstyled">Listar Productos</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
