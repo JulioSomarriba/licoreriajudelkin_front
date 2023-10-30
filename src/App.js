@@ -8,8 +8,8 @@ import Productolist from './pages/productolist';
 import CLienteList from './pages/ClienteList';
 import Empleado from './pages/Empleado';
 import EmpleadoList from './pages/EmpleadoList';
-import Marca from './pages/Marca';
-import MarcaList from './pages/MarcaList';
+import Categoria from './pages/Categoria';
+import CategoriaList from './pages/CategoriaList';
 import Detalleventa from './pages/Detalleventa';
 import DetalleventaList from './pages/DetalleventaList';
 import Venta from './pages/Venta';
@@ -30,8 +30,8 @@ function App() {
         <Route path= "/ClienteList" element={<CLienteList />} />
         <Route path= "/Empleado" element={<Empleado />} />
         <Route path= "/EmpleadoList" element={<EmpleadoList />} />
-        <Route path= "/Marca" element={<Marca />} />
-        <Route path= "/MarcaList" element={<MarcaList />} />
+        <Route path= "/Categoria" element={<Categoria />} />
+        <Route path= "/CategoriaList" element={<CategoriaList />} />
         <Route path= "/Detalleventa" element={<Detalleventa />} />
         <Route path= "/DetalleventaList" element={<DetalleventaList />} />
         <Route path= "/Venta" element={<Venta />} />

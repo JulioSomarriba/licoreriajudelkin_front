@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Marca() {
+function Categoria() {
 
   // Crear un estado para cada campo del formulario
   const [nombre, setnombre] = useState('');
@@ -48,7 +48,7 @@ function Marca() {
       <Container>
         <Card className="mt-3">
           <Card.Body>
-            <Card.Title>Registro de Marca</Card.Title>
+            <Card.Title>Registro de categoria</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>
               <Row className="g-3">
 
@@ -78,4 +78,4 @@ function Marca() {
   );
 }
 
-export default Marca;
+export default Categoria;

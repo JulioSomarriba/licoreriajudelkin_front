@@ -23,18 +23,30 @@ function Productolist() {
   };
   
 
-  const filteredMarca = productos.filter((producto) => {
+  const filteredCategoria = productos.filter((producto) => {
     // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
-    const nombre = producto.nombre.toLowerCase();
+    const idproducto = producto.idproducto;
+    const nombre = producto.nombre.toLowerCase(); 
+    const cantidad = producto.cantidad;
+    const precio = producto.precio;
+    const descripcion = producto.descripcion.toLowerCase();
+    const porcentaje_alcohol = producto.porcentaje_alcohol;
+    const idcategoria = producto.idcategoria;
     const search = searchQuery.toLowerCase();
     
   
     // Verifica si la cadena de búsqueda se encuentra en algún campo
     return (
-      nombre.includes(search)
+      idproducto === (search) ||
+      nombre.includes(search) ||
+      cantidad === (search) ||
+      precio === (search) ||
+      descripcion.includes(search) ||
+      porcentaje_alcohol === (search) ||
+      idcategoria === (search)
+      
     );
   });
-
 
   // Función para abrir el modal y pasar los datos del docente seleccionado
   const openModal = (producto) => {
@@ -144,11 +156,11 @@ function Productolist() {
                 <th>Precio</th>
                 <th>Descripcion</th>
                 <th>Porcentaje de alcohol</th>
-                <th>Marca</th>
+                <th>IDCategoria</th>
               </tr>
             </thead>
             <tbody>
-            {filteredMarca.map((producto) => (
+            {filteredCategoria.map((producto) => (
                 <tr key={producto.idproducto}>
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
@@ -156,7 +168,7 @@ function Productolist() {
                   <td>{producto.precio}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.porcentaje_alcohol}</td>
-                  <td>{producto.marca}</td>
+                  <td>{producto.idcategoria}</td>
                   <td>
                     <Button variant="primary" onClick={() => openModal(producto)}>Actualizar</Button>
                     <Button variant="danger" onClick={() => handleDelete(producto.idproducto)}>Eliminar</Button>

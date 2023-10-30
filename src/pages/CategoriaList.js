@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
 
-function Marcalist() {
+function CategoriaList() {
   const [Categoria, setCategoria] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCategoria, setSelectedCategoria] = useState({});
@@ -41,7 +41,7 @@ function Marcalist() {
   // Función para enviar el formulario de actualización
   const handleUpdate = () => {
     // Realiza la solicitud PUT al servidor para actualizar el registro
-    fetch(`http://localhost:5000/crud/updatecaregoria/${selectedCategoria.idcategoria}`, {
+    fetch(`http://localhost:5000/crud/updatecategoria/${selectedCategoria.idcategoria}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -158,4 +158,4 @@ function Marcalist() {
   );
 }
 
-export default Marcalist;
+export default CategoriaList;

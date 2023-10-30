@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import '../styles/App.css';
@@ -12,6 +12,9 @@ function Producto() {
   const [descripcion, setDescripcion] = useState('');
   const [porcentaje_alcohol, setPorcentaje_alcohol] = useState('');
 
+  const [categorias, setcategorias] = useState([]); // Estado para almacenar las especialidades
+  const [idcategoria, setidcategoria] = useState(''); // Estado para el valor seleccionado
+
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ function Producto() {
       precio,
       descripcion,
       porcentaje_alcohol,
+      idcategoria,
     };
 
     try {
@@ -44,6 +48,7 @@ function Producto() {
         setPrecio('');
         setDescripcion('');
         setPorcentaje_alcohol('');
+        setidcategoria('');
       } else {
         alert('Error al registrar el producto');
       }
@@ -52,6 +57,19 @@ function Producto() {
       alert('Error en la solicitud al servidor');
     }
   };
+
+  useEffect(() => {
+    // Realiza una solicitud a tu ruta para obtener las especialidades
+    fetch('http://localhost:5000/crud/readcategoria')
+      .then(response => response.json())
+      .then(data => {
+        // Actualiza el estado con las especialidades obtenidas
+        setcategorias(data);
+      })
+      .catch(error => {
+        console.error('Error al obtener las especialidades', error);
+      });
+  }, []);
 
   return(
     <div>
@@ -118,6 +136,23 @@ function Producto() {
                     />
                   </FloatingLabel>
                 </Col>
+
+                <Col sm="12" md="6" lg="4">
+                <FloatingLabel controlId="categoria" label="categorias">
+                <Form.Select
+                  aria-label="categorias"
+                  value={idcategoria}
+                  onChange={(e) => setidcategoria(e.target.value)}
+                >
+                  <option>Seleccione la categoria</option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria.idcategoria} value={categoria.idcategoria}>
+                      {categoria.idcategoria}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
+            </Col>
 
               </Row>
               <div className="center-button">

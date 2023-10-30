@@ -15,6 +15,38 @@ function CLienteList() {
     telefono: '',
   });
 
+   // Crear busqueda
+
+   const [searchQuery, setSearchQuery] = useState('');
+
+   const handleSearchChange = (e) => {
+     setSearchQuery(e.target.value);
+   };
+
+   const filteredClientes = Clientes.filter((cliente) => {
+    // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
+    const idclientes = cliente.idclientes;
+    const nombre = cliente.nombre.toLowerCase(); 
+    const apellido = cliente.apellido.toLowerCase();
+    const direccion = cliente.direccion.toLowerCase();
+    const correo = cliente.correo.toLowerCase();
+    const telefono = cliente.telefono.toLowerCase();
+    const search = searchQuery.toLowerCase();
+
+    
+    // Verifica si la cadena de búsqueda se encuentra en algún campo
+    return (
+      idclientes === (search) ||
+      nombre.includes(search) ||
+      apellido.includes (search) ||
+      direccion.includes (search) ||
+      correo.includes(search) ||
+      telefono === (search) 
+      
+      
+    );
+  });
+
   
  
   // Función para abrir el modal y pasar los datos del docente seleccionado
@@ -102,8 +134,21 @@ function CLienteList() {
       <Card className="m-3">
         <Card.Body>
           <Card.Title className="mb-3">Listado de clientes</Card.Title>
-
+          <Row className="mb-3">
+            <Col sm="6" md="6" lg="4">
+              <FloatingLabel controlId="search" label="Buscar">
+                <Form.Control
+                  type="text"
+                  placeholder="Buscar"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+              </FloatingLabel>
+            </Col>
+          </Row>
           <Table striped bordered hover>
+            
+            
             <thead>
               <tr>
                 <th>ID</th>
@@ -115,7 +160,7 @@ function CLienteList() {
               </tr>
             </thead>
             <tbody>
-              {Clientes.map((cliente) => (
+              {filteredClientes.map((cliente) => (
                 <tr key={cliente.DNI}>
                   <td>{cliente.DNI}</td>
                   <td>{cliente.nombre}</td>
