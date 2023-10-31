@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Cliente from './pages/cliente';
 import About from './pages/About';
 import Producto from './pages/producto';
@@ -18,24 +19,29 @@ import VentaList from './pages/VentaList';
 
 
 
+
 function App() {
+
+ const [userRol, setUserRol] = useState('');
+
   return (
     <Router>
       <Routes>
-        <Route path= "/" element={<Home />} />
-        <Route path= "/About" element={<About />} />
-        <Route path= "/cliente" element={<Cliente />} />
-        <Route path= "/producto" element={<Producto />} />
-        <Route path= "/productolist" element={<Productolist />} />
-        <Route path= "/ClienteList" element={<CLienteList />} />
-        <Route path= "/Empleado" element={<Empleado />} />
-        <Route path= "/EmpleadoList" element={<EmpleadoList />} />
-        <Route path= "/Categoria" element={<Categoria />} />
-        <Route path= "/CategoriaList" element={<CategoriaList />} />
-        <Route path= "/Detalleventa" element={<Detalleventa />} />
-        <Route path= "/DetalleventaList" element={<DetalleventaList />} />
-        <Route path= "/Venta" element={<Venta />} />
-        <Route path= "/VentaList" element={<VentaList />} />
+        <Route path="/" element={<Login rol={userRol} setRol={setUserRol} />} />
+        <Route path="/home" element={<Home rol={userRol} />} />
+        <Route path= "/About" element={<About rol={userRol} />} />
+        <Route path= "/cliente" element={<Cliente rol={userRol} />} />
+        <Route path= "/producto" element={<Producto rol={userRol} />} />
+        <Route path= "/productolist" element={<Productolist rol={userRol} />} />
+        <Route path= "/ClienteList" element={<CLienteList rol={userRol} />} />
+        <Route path= "/Empleado" element={<Empleado rol={userRol} />} />
+        <Route path= "/EmpleadoList" element={<EmpleadoList rol={userRol} />} />
+        <Route path= "/Categoria" element={<Categoria rol={userRol} />} />
+        <Route path= "/CategoriaList" element={<CategoriaList rol={userRol} />} />
+        <Route path= "/Detalleventa" element={<Detalleventa rol={userRol} />} />
+        <Route path= "/DetalleventaList" element={<DetalleventaList rol={userRol} />} />
+        <Route path= "/Venta" element={<Venta rol={userRol} />} />
+        <Route path= "/VentaList" element={<VentaList rol={userRol} />} />
       </Routes>
     </Router>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
+import { Table, Button, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
 
 function Productolist() {
@@ -8,7 +8,7 @@ function Productolist() {
   const [selectedProducto, setSelectedProducto] = useState({});
   const [formData, setFormData] = useState({
     nombre: '',
-    cantidad: '',
+    existencia: '',
     precio: '',
     descripcion: '',
     porcentaje_alcohol: '',
@@ -27,7 +27,7 @@ function Productolist() {
     // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
     const idproducto = producto.idproducto;
     const nombre = producto.nombre.toLowerCase(); 
-    const cantidad = producto.cantidad;
+    const existencia = producto.existencia;
     const precio = producto.precio;
     const descripcion = producto.descripcion.toLowerCase();
     const porcentaje_alcohol = producto.porcentaje_alcohol;
@@ -39,7 +39,7 @@ function Productolist() {
     return (
       idproducto === (search) ||
       nombre.includes(search) ||
-      cantidad === (search) ||
+      existencia === (search) ||
       precio === (search) ||
       descripcion.includes(search) ||
       porcentaje_alcohol === (search) ||
@@ -54,7 +54,7 @@ function Productolist() {
 
     setFormData({
       nombre: producto.nombre,
-      cantidad: producto.cantidad,
+      existencia: producto.existencia,
       precio: producto.precio,
       descripcion: producto.descripcion,
       porcentaje_alcohol: producto.porcentaje_alcohol,
@@ -152,7 +152,7 @@ function Productolist() {
               <tr>
                 <th>ID</th>
                 <th>Nombres</th>
-                <th>Cantidad</th>
+                <th>Existencia</th>
                 <th>Precio</th>
                 <th>Descripcion</th>
                 <th>Porcentaje de alcohol</th>
@@ -164,7 +164,7 @@ function Productolist() {
                 <tr key={producto.idproducto}>
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
-                  <td>{producto.cantidad}</td>
+                  <td>{producto.existencia}</td>
                   <td>{producto.precio}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.porcentaje_alcohol}</td>
@@ -205,12 +205,12 @@ function Productolist() {
                             </Col>
 
                             <Col sm="6" md="6" lg="6">
-                                <FloatingLabel controlId="cantidad" label="Cantidad">
+                                <FloatingLabel controlId="existencia" label="Cantidad">
                                     <Form.Control
                                     type="number"
-                                    placeholder="Ingrese la cantidad"
-                                    value={formData.cantidad}
-                                    name="cantidad"
+                                    placeholder="Ingrese la existencia"
+                                    value={formData.existencia}
+                                    name="existencia"
                                     onChange={handleFormChange}
                                     />
                                 </FloatingLabel>
