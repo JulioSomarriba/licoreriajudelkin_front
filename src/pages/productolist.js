@@ -16,6 +16,38 @@ function Productolist() {
     imagen: ''
   });
 
+  const [categorias, setcategorias] = useState([]);
+
+  useEffect(() => {
+    // Realiza una solicitud a tu ruta para obtener las especialidades
+    fetch('http://localhost:5000/crud/readcategoria')
+      .then(response => response.json())
+      .then(data => {
+        // Actualiza el estado con las especialidades obtenidas
+        setcategorias(data);
+      })
+      .catch(error => {
+        console.error('Error al obtener las categorías.', error);
+      });
+  }, []);
+
+  const handleImagenChange = (event) => {
+    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result; // Obtener la imagen en formato base64
+      setFormData({
+        ...formData,
+        imagen: base64String
+      });
+    }; 
+    if (file) {
+      reader.readAsDataURL(file); // Lee el contenido del archivo como base64
+    }
+  };
+
+
   // Crear busqueda
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,7 +57,7 @@ function Productolist() {
   };
   
 
-  const filteredCategoria = productos.filter((producto) => {
+  const filteredProductos = productos.filter((producto) => {
     // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
     const idproducto = producto.idproducto;
     const nombre = producto.nombre.toLowerCase(); 
@@ -39,13 +71,13 @@ function Productolist() {
   
     // Verifica si la cadena de búsqueda se encuentra en algún campo
     return (
-      idproducto === (search) ||
+      idproducto == (search) ||
       nombre.includes(search) ||
-      cantidad === (search) ||
-      precio === (search) ||
+      cantidad == (search) ||
+      precio == (search) ||
       descripcion.includes(search) ||
-      porcentaje_alcohol === (search) ||
-      idcategoria === (search)
+      porcentaje_alcohol == (search) ||
+      idcategoria == (search)
     );
   });
 
@@ -59,7 +91,8 @@ function Productolist() {
       precio: producto.precio,
       descripcion: producto.descripcion,
       porcentaje_alcohol: producto.porcentaje_alcohol,
-      idcategoria: producto.idcategoria
+      idcategoria: producto.idcategoria,
+      imagen: producto.imagen
     });
     setShowModal(true);
   };
@@ -163,7 +196,7 @@ function Productolist() {
               </tr>
             </thead>
             <tbody>
-            {filteredCategoria.map((producto) => (
+            {filteredProductos.map((producto) => (
                 <tr key={producto.idproducto}>
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
@@ -247,7 +280,7 @@ function Productolist() {
                                 </FloatingLabel>
                             </Col>
 
-                            <Col sm="12" md="6" lg="12">
+                            <Col sm="12" md="6" lg="6">
                                 <FloatingLabel controlId="descripcion" label="Descripciòn">
                                     <Form.Control 
                                     type="text" 
@@ -257,6 +290,40 @@ function Productolist() {
                                     onChange={handleFormChange}
                                     />
                                 </FloatingLabel>
+                            </Col>
+
+                            <Col sm="12" md="6" lg="6">
+                              <FloatingLabel controlId="categoria" label="categorias">
+                                <Form.Select
+                                  aria-label="categorias"
+                                  value={formData.idcategoria}
+                                  onChange={(e) => 
+                                    setFormData({
+                                      idcategoria: e.target.value
+                                    })
+                                  }
+                                >
+                                  <option>Seleccione la categoria</option>
+                                  {categorias.map((categoria) => (
+                                    <option key={categoria.idcategoria} value={categoria.idcategoria}>
+                                      {categoria.nombre}
+                                    </option>
+                                  ))}
+                                </Form.Select>
+                              </FloatingLabel>
+                            </Col>
+
+
+                            <Col sm="12" md="12" lg="12">
+                              <Form.Group controlId="imagen" className="" >
+                                <Form.Control 
+                                  type="file" 
+                                  accept=".jpg, .png, .jpeg"
+                                  size="lg"
+                                  name="imagen"
+                                  onChange={handleImagenChange}
+                                />
+                              </Form.Group>
                             </Col>
 
                         </Row>

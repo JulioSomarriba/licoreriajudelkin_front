@@ -86,7 +86,7 @@ function Producto() {
         setcategorias(data);
       })
       .catch(error => {
-        console.error('Error al obtener las especialidades', error);
+        console.error('Error al obtener las categorías.', error);
       });
   }, []);
 
