@@ -8,10 +8,12 @@ function Productolist() {
   const [selectedProducto, setSelectedProducto] = useState({});
   const [formData, setFormData] = useState({
     nombre: '',
-    existencia: '',
+    cantidad: '',
     precio: '',
     descripcion: '',
     porcentaje_alcohol: '',
+    idcategoria: '',
+    imagen: ''
   });
 
   // Crear busqueda
@@ -27,7 +29,7 @@ function Productolist() {
     // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
     const idproducto = producto.idproducto;
     const nombre = producto.nombre.toLowerCase(); 
-    const existencia = producto.existencia;
+    const cantidad = producto.cantidad;
     const precio = producto.precio;
     const descripcion = producto.descripcion.toLowerCase();
     const porcentaje_alcohol = producto.porcentaje_alcohol;
@@ -39,12 +41,11 @@ function Productolist() {
     return (
       idproducto === (search) ||
       nombre.includes(search) ||
-      existencia === (search) ||
+      cantidad === (search) ||
       precio === (search) ||
       descripcion.includes(search) ||
       porcentaje_alcohol === (search) ||
       idcategoria === (search)
-      
     );
   });
 
@@ -54,10 +55,11 @@ function Productolist() {
 
     setFormData({
       nombre: producto.nombre,
-      existencia: producto.existencia,
+      cantidad: producto.cantidad,
       precio: producto.precio,
       descripcion: producto.descripcion,
       porcentaje_alcohol: producto.porcentaje_alcohol,
+      idcategoria: producto.idcategoria
     });
     setShowModal(true);
   };
@@ -157,6 +159,7 @@ function Productolist() {
                 <th>Descripcion</th>
                 <th>Porcentaje de alcohol</th>
                 <th>IDCategoria</th>
+                <th>Imagen</th>
               </tr>
             </thead>
             <tbody>
@@ -164,11 +167,15 @@ function Productolist() {
                 <tr key={producto.idproducto}>
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
-                  <td>{producto.existencia}</td>
+                  <td>{producto.cantidad}</td>
                   <td>{producto.precio}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.porcentaje_alcohol}</td>
                   <td>{producto.idcategoria}</td>
+                  <td>
+                    {/* Muestra la imagen en base64 */}
+                    <img src={producto.imagen} alt={producto.nombre} style={{ width: '50px' }} />
+                  </td>
                   <td>
                     <Button variant="primary" onClick={() => openModal(producto)}>Actualizar</Button>
                     <Button variant="danger" onClick={() => handleDelete(producto.idproducto)}>Eliminar</Button>

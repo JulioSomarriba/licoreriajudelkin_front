@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Cliente from './pages/cliente';
+import Cliente from './pages/Cliente';
 import About from './pages/About';
 import Producto from './pages/producto';
 import Productolist from './pages/productolist';

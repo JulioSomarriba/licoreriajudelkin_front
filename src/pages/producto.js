@@ -7,13 +7,31 @@ function Producto() {
 
   // Crear un estado para cada campo del formulario
   const [nombre, setNombre] = useState('');
-  const [existencia, setExistencia] = useState('');
+  const [cantidad, setCantidad] = useState('');
   const [precio, setPrecio] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [porcentaje_alcohol, setPorcentaje_alcohol] = useState('');
 
-  const [categorias, setcategorias] = useState([]); // Estado para almacenar las especialidades
-  const [idcategoria, setidcategoria] = useState(''); // Estado para el valor seleccionado
+
+
+  const [categorias, setcategorias] = useState([]);
+  const [idcategoria, setidcategoria] = useState(''); 
+
+
+  const [imagen, setImagen] = useState('');
+
+  const handleImagenChange = (event) => {
+    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result; // Obtener la imagen en formato base64
+      setImagen(base64String); // Puedes visualizar la imagen en base64 en la consola para asegurarte de que la conversión se hizo correctamente
+    }; 
+    if (file) {
+      reader.readAsDataURL(file); // Lee el contenido del archivo como base64
+    }
+  };
 
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
@@ -22,11 +40,12 @@ function Producto() {
     // Crear un objeto con los datos del formulario
     const formData = {
       nombre,
-      existencia,
+      cantidad,
       precio,
       descripcion,
       porcentaje_alcohol,
       idcategoria,
+      imagen
     };
 
     try {
@@ -44,7 +63,7 @@ function Producto() {
         alert('Registro exitoso');
         // Reiniciar los campos del formulario
         setNombre('');
-        setExistencia('');
+        setCantidad('');
         setPrecio('');
         setDescripcion('');
         setPorcentaje_alcohol('');
@@ -98,8 +117,8 @@ function Producto() {
                     <Form.Control
                       type="number"
                       placeholder="Ingrese la cantidad"
-                      value={existencia}
-                      onChange={(e) => setExistencia(e.target.value)}
+                      value={cantidad}
+                      onChange={(e) => setCantidad(e.target.value)}
                     />
                   </FloatingLabel>
                 </Col>
@@ -127,7 +146,7 @@ function Producto() {
                 </Col>
 
                 <Col sm="12" md="6" lg="12">
-                  <FloatingLabel controlId="descripcion" label="Descripciòn">
+                  <FloatingLabel controlId="descripcion" label="Descripción">
                     <Form.Control 
                       type="text" 
                       placeholder="Ingrese la descripcion"
@@ -137,22 +156,33 @@ function Producto() {
                   </FloatingLabel>
                 </Col>
 
-                <Col sm="12" md="6" lg="4">
-                <FloatingLabel controlId="categoria" label="categorias">
-                <Form.Select
-                  aria-label="categorias"
-                  value={idcategoria}
-                  onChange={(e) => setidcategoria(e.target.value)}
-                >
-                  <option>Seleccione la categoria</option>
-                  {categorias.map((categoria) => (
-                    <option key={categoria.idcategoria} value={categoria.idcategoria}>
-                      {categoria.idcategoria}
-                    </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-            </Col>
+                <Col sm="12" md="6" lg="6">
+                  <FloatingLabel controlId="categoria" label="categorias">
+                    <Form.Select
+                      aria-label="categorias"
+                      value={idcategoria}
+                      onChange={(e) => setidcategoria(e.target.value)}
+                    >
+                      <option>Seleccione la categoria</option>
+                      {categorias.map((categoria) => (
+                        <option key={categoria.idcategoria} value={categoria.idcategoria}>
+                          {categoria.nombre}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </FloatingLabel>
+                </Col>
+
+                <Col sm="12" md="6" lg="6">
+                  <Form.Group controlId="imagen" className="" >
+                    <Form.Control 
+                      type="file" 
+                      accept=".jpg, .png, .jpeg"
+                      size="lg"
+                      onChange={handleImagenChange}
+                    />
+                  </Form.Group>
+                </Col>
 
               </Row>
               <div className="center-button">
