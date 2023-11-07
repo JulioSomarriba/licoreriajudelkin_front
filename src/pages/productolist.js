@@ -8,7 +8,7 @@ function Productolist() {
   const [selectedProducto, setSelectedProducto] = useState({});
   const [formData, setFormData] = useState({
     nombre: '',
-    cantidad: '',
+    existencia: '',
     precio: '',
     descripcion: '',
     porcentaje_alcohol: '',
@@ -61,7 +61,7 @@ function Productolist() {
     // Convierte los valores de los campos a minúsculas para realizar una búsqueda insensible a mayúsculas y minúsculas
     const idproducto = producto.idproducto;
     const nombre = producto.nombre.toLowerCase(); 
-    const cantidad = producto.cantidad;
+    const existencia = producto.existencia;
     const precio = producto.precio;
     const descripcion = producto.descripcion.toLowerCase();
     const porcentaje_alcohol = producto.porcentaje_alcohol;
@@ -73,7 +73,7 @@ function Productolist() {
     return (
       idproducto == (search) ||
       nombre.includes(search) ||
-      cantidad == (search) ||
+      existencia == (search) ||
       precio == (search) ||
       descripcion.includes(search) ||
       porcentaje_alcohol == (search) ||
@@ -87,7 +87,7 @@ function Productolist() {
 
     setFormData({
       nombre: producto.nombre,
-      cantidad: producto.cantidad,
+      existencia: producto.existencia,
       precio: producto.precio,
       descripcion: producto.descripcion,
       porcentaje_alcohol: producto.porcentaje_alcohol,
@@ -165,7 +165,7 @@ function Productolist() {
     <div>
       <Header />
 
-      <Card className="m-3">
+      <Card className="mt-3">
         <Card.Body>
           <Card.Title className="mb-3">Listado de Productos</Card.Title>
           <Row className="mb-3">
@@ -180,7 +180,7 @@ function Productolist() {
               </FloatingLabel>
             </Col>
           </Row>
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive>
 
 
             <thead>
@@ -200,7 +200,7 @@ function Productolist() {
                 <tr key={producto.idproducto}>
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
-                  <td>{producto.cantidad}</td>
+                  <td>{producto.existencia}</td>
                   <td>{producto.precio}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.porcentaje_alcohol}</td>
@@ -245,7 +245,7 @@ function Productolist() {
                             </Col>
 
                             <Col sm="6" md="6" lg="6">
-                                <FloatingLabel controlId="existencia" label="Cantidad">
+                                <FloatingLabel controlId="existencia" label="existencia">
                                     <Form.Control
                                     type="number"
                                     placeholder="Ingrese la existencia"

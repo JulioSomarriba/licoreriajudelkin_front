@@ -17,7 +17,7 @@ function Header({ rol }) {
     {rol === 'admin' && (  
     <div>
       {/* Navbar principal */}
-      <Navbar className="navbar-color" variant="dark" expand="md">
+      <Navbar className="navbar-color" variant="dark" expand="md" fixed='top'>
         <Container>
           <Navbar.Brand href="#home">Licoreria Judelkin</Navbar.Brand>
           <Navbar.Toggle
@@ -61,6 +61,16 @@ function Header({ rol }) {
                   <Link to="/productolist" className="link-unstyled">Listar Productos</Link>
                 </NavDropdown.Item>
               </NavDropdown>
+
+              <Nav.Link>
+                    <Link to="/galeria" className="link-unstyled">Galeria</Link>
+                  </Nav.Link>
+
+                  <Nav.Link>
+                    <Link to="/estadisticas" className="link-unstyled">Estadisticas</Link>
+                  </Nav.Link>
+
+                  
 
               <NavDropdown title="Ventas" id="Venta">
                 <NavDropdown.Item>
@@ -141,6 +151,10 @@ function Header({ rol }) {
                 <Link to="/actualizar-productos" className="link-unstyled">Listar Productos</Link>
               </NavDropdown.Item>
             </NavDropdown>
+
+            
+
+            
 
           </Nav>
         </Offcanvas.Body>

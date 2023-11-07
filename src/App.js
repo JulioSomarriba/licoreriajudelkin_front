@@ -15,7 +15,8 @@ import Detalleventa from './pages/Detalleventa';
 import DetalleventaList from './pages/DetalleventaList';
 import Venta from './pages/Venta';
 import VentaList from './pages/VentaList';
-
+import Estadisticas from './pages/Estadisticas';
+import Galeria from './pages/Galeria';
 
 
 
@@ -42,6 +43,8 @@ function App() {
         <Route path= "/DetalleventaList" element={<DetalleventaList rol={userRol} />} />
         <Route path= "/Venta" element={<Venta rol={userRol} />} />
         <Route path= "/VentaList" element={<VentaList rol={userRol} />} />
+        <Route path= "/Estadisticas" element={<Estadisticas rol={userRol} />} />
+        <Route path="/galeria" element={<Galeria rol={userRol} />} />
       </Routes>
     </Router>
 

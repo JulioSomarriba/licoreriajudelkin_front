@@ -7,7 +7,7 @@ function Producto() {
 
   // Crear un estado para cada campo del formulario
   const [nombre, setNombre] = useState('');
-  const [cantidad, setCantidad] = useState('');
+  const [existencia, setExistencia] = useState('');
   const [precio, setPrecio] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [porcentaje_alcohol, setPorcentaje_alcohol] = useState('');
@@ -40,7 +40,7 @@ function Producto() {
     // Crear un objeto con los datos del formulario
     const formData = {
       nombre,
-      cantidad,
+      existencia,
       precio,
       descripcion,
       porcentaje_alcohol,
@@ -63,7 +63,7 @@ function Producto() {
         alert('Registro exitoso');
         // Reiniciar los campos del formulario
         setNombre('');
-        setCantidad('');
+        setExistencia('');
         setPrecio('');
         setDescripcion('');
         setPorcentaje_alcohol('');
@@ -113,12 +113,12 @@ function Producto() {
                 </Col>
 
                 <Col sm="6" md="6" lg="6">
-                  <FloatingLabel controlId="cantidad" label="Cantidad">
+                  <FloatingLabel controlId="existencia" label="existencia">
                     <Form.Control
                       type="number"
-                      placeholder="Ingrese la cantidad"
-                      value={cantidad}
-                      onChange={(e) => setCantidad(e.target.value)}
+                      placeholder="Ingrese la existencia"
+                      value={existencia}
+                      onChange={(e) => setExistencia(e.target.value)}
                     />
                   </FloatingLabel>
                 </Col>
