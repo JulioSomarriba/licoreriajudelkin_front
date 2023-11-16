@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function VentaList() {
   const [Venta, setVenta] = useState([]);
@@ -11,6 +12,7 @@ function VentaList() {
     tipo_de_venta: '',
   });
 
+  
   // Función para abrir el modal y pasar los datos del docente seleccionado
   const openModal = (venta) => {
     setSelectedVenta(venta);
@@ -72,7 +74,7 @@ function VentaList() {
 
   // Función para eliminar un docente
   const handleDelete = (idventa) => {
-    const confirmation = window.confirm('¿Seguro que deseas eliminar este docente?');
+    const confirmation = window.confirm('¿Seguro que deseas eliminar esta venta?');
     if (confirmation) {
       // Realiza la solicitud DELETE al servidor para eliminar el docente
       fetch(`http://localhost:5000/crud/deleteventa/${idventa}`, {
@@ -117,9 +119,9 @@ function VentaList() {
                   <td>{venta.idventa}</td>
                   <td>{formatDateForInput(venta.fecha)}</td>
                   <td>{venta.tipo_de_venta}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => openModal(venta)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(venta.idventa)}>Eliminar</Button>
+                  <td className='center-button'>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(venta)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(venta.idventa)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}

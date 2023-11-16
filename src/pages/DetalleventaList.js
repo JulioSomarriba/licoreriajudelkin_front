@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function DetalleventaList() {
   const [Detalleventas, setDetalleventa] = useState([]);
@@ -90,7 +91,7 @@ function DetalleventaList() {
     <div>
       <Header />
 
-      <Card className="m-3">
+      <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listar Detalle de venta</Card.Title>
           <Table striped bordered hover>
@@ -107,9 +108,9 @@ function DetalleventaList() {
                   <td>{detalleventa.iddetalleventa}</td>
                   <td>{detalleventa.cantidad}</td>
                   <td>{detalleventa.precio}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => openModal(detalleventa)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(detalleventa.iddetalleventa)}>Eliminar</Button>
+                  <td className='center-button'>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(detalleventa)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(detalleventa.iddetalleventa)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}

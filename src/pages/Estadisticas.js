@@ -4,7 +4,8 @@ import { Button, Row, Col, Card, Container } from 'react-bootstrap';  // Importa
 import jsPDF from 'jspdf';  // Importación de jsPDF para la generación de documentos PDF
 import Chart from 'chart.js/auto';  // Importación de Chart.js para gráficos
 import '../styles/App.css';  // Importación de estilos CSS desde '../styles/App.css'
-
+import html2canvas from 'html2canvas';
+import Footer from '../components/Footer';
 
 //Asegúrate de instalar jsPDF en tu proyecto si aún no lo has hecho
 //  npm install jspdf
@@ -40,15 +41,15 @@ function Estadisticas({ rol }) {  // Declaración del componente Estadisticas co
       }
 
       const nombresProductos = productos.map((producto) => producto.nombre);  // Extrae los nombres de los productos
-      const cantidades = productos.map((producto) => producto.cantidad);  // Extrae las cantidades de los productos
+      const Existencia = productos.map((producto) => producto.existencia);  // Extrae las cantidades de los productos
 
       const almacen = new Chart(ctx, {  // Crea un nuevo gráfico de tipo 'bar' con Chart.js y lo asigna al elemento canvas
         type: 'bar',
         data: {
           labels: nombresProductos,  // Asigna los nombres de productos como etiquetas para el eje X
           datasets: [{
-            label: 'Cantidad disponible',  // Etiqueta para la leyenda del gráfico
-            data: cantidades,  // Asigna las cantidades de productos para la visualización
+            label: 'existencia disponible',  // Etiqueta para la leyenda del gráfico
+            data: Existencia,  // Asigna las cantidades de productos para la visualización
             backgroundColor: 'rgba(54, 162, 235, 0.5)',  // Define el color de fondo de las barras
             borderColor: 'rgba(54, 162, 235, 1)',  // Define el color del borde de las barras
             borderWidth: 1  // Define el ancho del borde de las barras
@@ -77,7 +78,7 @@ function Estadisticas({ rol }) {  // Declaración del componente Estadisticas co
 
         productos.forEach((producto) => {  // Itera sobre los productos para generar el reporte
           doc.text(`Nombre: ${producto.nombre}`, 20, y);  // Agrega el nombre del producto al documento PDF
-          doc.text(`Cantidad: ${producto.cantidad}`, 20, y + 10);  // Agrega la cantidad del producto al documento PDF
+          doc.text(`existencia: ${producto.existencia}`, 20, y + 10);  // Agrega la cantidad del producto al documento PDF
 
           y += 30; // Incrementa la posición Y para el siguiente producto
           if (y >= 280) {  // Si alcanza el final de la página, crea una nueva página
@@ -91,35 +92,74 @@ function Estadisticas({ rol }) {  // Declaración del componente Estadisticas co
       .catch((error) => console.error('Error al obtener los productos:', error));  // Manejo de errores en caso de fallar la solicitud
   };
 
-  return(
-    <div>
-      <Header rol={ rol } />  
+        // Definición de la función generarReporteAlmacenImg como una función asíncrona
+      const generarReporteAlmacenImg = async () => {
+        try {
+          // Utiliza html2canvas para capturar el contenido del elemento con el ID 'myChart' y obtener un objeto canvas
+          const canvas = await html2canvas(document.getElementById('myChart'));
+          // Crea un nuevo objeto jsPDF para trabajar con documentos PDF
+          const pdf = new jsPDF();
+          // Convierte el objeto canvas a una URL de datos en formato PNG
+          const imgData = canvas.toDataURL('image/png');
+          // Añade un texto al documento PDF
+          pdf.text("Reporte de Estado de Almacén", 20, 10);
+          // Añade la imagen capturada del gráfico al documento PDF, con ajustes de coordenadas y tamaño
+          pdf.addImage(imgData, 'PNG', 10, 20, 100, 100);
+          // Guarda el documento PDF con un nombre específico
+          pdf.save("reporte_almacen_con_grafico.pdf");
+        } catch (error) {
+          // Captura y maneja cualquier error que pueda ocurrir durante la ejecución del bloque try
+          console.error('Error al generar el reporte con imagen:', error);
+        }
+      };
 
-      <Container className="margen-contenedor">
-
-        <Row className="g-3">
-
-          <Col sm="6" md="6" lg="4">
-            <Card>
-              <Card.Body>
-                <Card.Title>Estado del almacen</Card.Title>
-                <canvas id="myChart"  height="300"></canvas>
-              </Card.Body>
-
-              <Card.Body>
-                <Button onClick={generarReporteAlmacen}>
-                  Generar reporte
-                </Button>
-              </Card.Body>
-
-            </Card>
-          </Col>
-
-        </Row>
-      </Container>
-
-    </div>
-  );
-}
+      return(
+        <div>
+          <Header rol={ rol } />  
+    
+          <Container className="margen-contenedor">
+    
+            <Row className="g-3">
+    
+              <Col sm="6" md="6" lg="4">
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Estado del almacen</Card.Title>
+                    <canvas id="myChart"  height="300"></canvas>
+                  </Card.Body>
+    
+                  <Card.Body>
+                    <Button onClick={generarReporteAlmacen}>
+                      Generar reporte
+                    </Button>
+                  </Card.Body>
+    
+                </Card>
+              </Col>
+    
+              <Col sm="6" md="6" lg="4">
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Estado del almacen</Card.Title>
+                  </Card.Body>
+    
+                  <Card.Body>
+                    <Button onClick={generarReporteAlmacenImg}>
+                      Generar reporte con imagen
+                    </Button>
+                  </Card.Body>
+    
+                </Card>
+              </Col>
+    
+            </Row>
+          </Container>
+    
+          <Footer/>
+    
+        </div>
+      );
+    }
+    
 
 export default Estadisticas;  // Exporta el componente Estadisticas para su uso en otras partes de la aplicación

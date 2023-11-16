@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function Productolist() {
   const [productos, setProductos] = useState([]);
@@ -165,7 +166,7 @@ function Productolist() {
     <div>
       <Header />
 
-      <Card className="mt-3">
+      <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listado de Productos</Card.Title>
           <Row className="mb-3">
@@ -201,7 +202,7 @@ function Productolist() {
                   <td>{producto.idproducto}</td>
                   <td>{producto.nombre}</td>
                   <td>{producto.existencia}</td>
-                  <td>{producto.precio}</td>
+                  <td>C$ {producto.precio}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.porcentaje_alcohol}</td>
                   <td>{producto.idcategoria}</td>
@@ -210,8 +211,8 @@ function Productolist() {
                     <img src={producto.imagen} alt={producto.nombre} style={{ width: '50px' }} />
                   </td>
                   <td>
-                    <Button variant="primary" onClick={() => openModal(producto)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(producto.idproducto)}>Eliminar</Button>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(producto)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(producto.idproducto)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}

@@ -52,7 +52,7 @@ function Galeria({ rol }) {  // Define un componente funcional Galeria que recib
     <Container className="margen-contenedor">
 
       <Row className="mb-3">
-        <Col sm="6" md="6" lg="4">
+        <Col sm="6" md="6" lg="6">
           <FloatingLabel controlId="search" label="Buscar">
             <Form.Control
               type="text"
@@ -66,7 +66,7 @@ function Galeria({ rol }) {  // Define un componente funcional Galeria que recib
 
       <Row className="g-3">
         {filteredProductos.map((producto) => (
-          <Col sm="12" md="4" lg="3">
+          <Col sm="4" md="4" lg="4">
             <Card>
               <Card.Img className="image-card" variant="top" src={producto.imagen} alt={producto.nombre} />
               <Card.Body>
@@ -75,8 +75,7 @@ function Galeria({ rol }) {  // Define un componente funcional Galeria que recib
                   {producto.descripcion}
                 </Card.Text>
                 <div>
-                  <Badge bg="primary">Almacen: {producto.cantidad}</Badge>
-                  <Badge bg="success">Precio: {producto.precio}</Badge>
+                  <Badge bg="success">Precio: C$ {producto.precio}</Badge>
                   <Badge bg="warning" text="dark">
                     Alcohol: {producto.porcentaje_alcohol}%
                   </Badge>

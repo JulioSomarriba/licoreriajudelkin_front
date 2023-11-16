@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Offcanvas, Button, NavDropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+
 function Header({ rol }) {
   
   const [showMenu, setShowMenu] = useState(false);
@@ -14,7 +15,7 @@ function Header({ rol }) {
   return (
 
     <div>
-    {rol === 'admin' && (  
+    {'admin' === 'admin' && (  
     <div>
       {/* Navbar principal */}
       <Navbar className="navbar-color" variant="dark" expand="md" fixed='top'>
@@ -102,6 +103,10 @@ function Header({ rol }) {
                 </NavDropdown.Item>
               </NavDropdown>
 
+              <Nav.Link>
+                    <Link to="/" className="link-unstyled">Cerrar sesión</Link>
+                  </Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
           <Button
@@ -161,7 +166,7 @@ function Header({ rol }) {
       </Offcanvas>
     </div>)}
 
-    {rol === 'ventas' && ( 
+    {'ventas' === 'ventas' && ( 
 
           <div>
           {/* Navbar principal */}

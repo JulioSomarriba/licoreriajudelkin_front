@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function EmpleadoList() {
   const [Empleados, setEmpleados] = useState([]);
@@ -96,7 +97,7 @@ function EmpleadoList() {
     <div>
       <Header />
 
-      <Card className="m-3">
+      <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listado de Empleados</Card.Title>
           <Table striped bordered hover>
@@ -120,8 +121,8 @@ function EmpleadoList() {
                   <td>{empleado.direccion}</td>
                   <td>{empleado.correo}</td>
                   <td>
-                    <Button variant="primary" onClick={() => openModal(empleado)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(empleado.idempleado)}>Eliminar</Button>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(empleado)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(empleado.idempleado)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}

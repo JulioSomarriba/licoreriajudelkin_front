@@ -9,6 +9,8 @@ function Detalleventa() {
   const [cantidad, setCantidad] = useState('');
   const [precio, setPrecio] = useState('');
 
+  
+
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +51,7 @@ function Detalleventa() {
       <Header />
       
       <Container>
-        <Card className="mt-3">
+        <Card className="margen-contenedor">
           <Card.Body>
             <Card.Title>Registrar Detalle de venta</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>

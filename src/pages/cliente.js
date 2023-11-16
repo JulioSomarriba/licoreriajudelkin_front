@@ -58,7 +58,7 @@ function Cliente() {
       <Header />
       
       <Container>
-        <Card className="mt-3">
+        <Card className="margen-contenedor">
           <Card.Body>
             <Card.Title>Registro de Cliente</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>
@@ -111,7 +111,7 @@ function Cliente() {
                 <Col sm="12" md="12" lg="12">
                   <FloatingLabel controlId="telefono" label="telefono">
                     <Form.Control 
-                      type="text" 
+                      type="number" 
                       placeholder="Ingrese su telefono" 
                       value={telefono}
                       onChange={(e) => settelefono(e.target.value)}

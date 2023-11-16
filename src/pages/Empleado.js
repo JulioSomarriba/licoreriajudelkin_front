@@ -58,7 +58,7 @@ function Empleado() {
        <Header />
        
        <Container>
-         <Card className="mt-3">
+         <Card className="margen-contenedor">
            <Card.Body>
              <Card.Title>Registrar de Empleado</Card.Title>
              <Form className="mt-3" onSubmit={handleSubmit}>

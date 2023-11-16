@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
-
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function CLienteList() {
   const [Clientes, setClientes] = useState([]);
@@ -131,7 +131,7 @@ function CLienteList() {
     <div>
       <Header />
 
-      <Card className="m-3">
+      <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listado de clientes</Card.Title>
           <Row className="mb-3">
@@ -169,8 +169,8 @@ function CLienteList() {
                   <td>{cliente.correo}</td>
                   <td>{cliente.telefono}</td>
                   <td>
-                    <Button variant="primary" onClick={() => openModal(cliente)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(cliente.DNI)}>Eliminar</Button>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(cliente)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(cliente.DNI)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}

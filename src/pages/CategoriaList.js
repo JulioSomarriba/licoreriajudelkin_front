@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
+import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
 function CategoriaList() {
   const [Categoria, setCategoria] = useState([]);
@@ -88,7 +89,7 @@ function CategoriaList() {
     <div>
       <Header />
 
-      <Card className="m-3">
+      <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Lista de categoria</Card.Title>
           <Table striped bordered hover>
@@ -104,8 +105,8 @@ function CategoriaList() {
                   <td>{categoria.idcategoria}</td>
                   <td>{categoria.nombre}</td>
                   <td>
-                    <Button variant="primary" onClick={() => openModal(categoria)}>Actualizar</Button>
-                    <Button variant="danger" onClick={() => handleDelete(categoria.idcategoria)}>Eliminar</Button>
+                    <Button variant="primary" className='margin-button' onClick={() => openModal(categoria)}><FaPencil /></Button>
+                    <Button variant="danger" className='margin-button' onClick={() => handleDelete(categoria.idcategoria)}><FaTrashCan /></Button>
                   </td>
                 </tr>
               ))}
