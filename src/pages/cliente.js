@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Cliente() {
+function Cliente({rol}) {
 
   // Crear un estado para cada campo del formulario
   const [nombre, setnombre] = useState('');
@@ -45,7 +45,7 @@ function Cliente() {
         setcorreo('');
         settelefono('');
       } else {
-        alert('Error al registrar el cliente');
+        alert('Asegurese de ingresar todos los datos de cliente');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -53,9 +53,23 @@ function Cliente() {
     }
   };
 
+
+   const handleNombreClinteChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoNombre = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setnombre(nuevoNombre);
+  };
+
+  const handleApellidoClinteChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoapellido = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setapellido(nuevoapellido);
+  };
+
+
   return(
     <div>
-      <Header />
+      <Header rol={rol}/>
       
       <Container>
         <Card className="margen-contenedor">
@@ -70,7 +84,7 @@ function Cliente() {
                       type="text"
                       placeholder="Ingrese el nombre"
                       value={nombre}
-                      onChange={(e) => setnombre(e.target.value)}
+                      onChange={handleNombreClinteChange}
                     />
                   </FloatingLabel>
                 </Col>
@@ -81,7 +95,7 @@ function Cliente() {
                       type="text"
                       placeholder="Ingrese el apellido"
                       value={apellido}
-                      onChange={(e) => setapellido(e.target.value)}
+                      onChange={handleApellidoClinteChange}
                     />
                   </FloatingLabel>
                 </Col>
@@ -132,5 +146,6 @@ function Cliente() {
     </div>
   );
 }
+
 
 export default Cliente;

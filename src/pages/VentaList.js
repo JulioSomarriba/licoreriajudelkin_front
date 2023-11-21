@@ -3,7 +3,7 @@ import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  }
 import Header from '../components/Header';
 import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
-function VentaList() {
+function VentaList({rol}) {
   const [Venta, setVenta] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedVenta, setSelectedVenta] = useState({});
@@ -100,7 +100,7 @@ function VentaList() {
 
   return (
     <div>
-      <Header />
+      <Header rol={rol}/>
 
       <Card className="m-3">
         <Card.Body>

@@ -3,33 +3,27 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Producto() {
-
+function Producto({ rol }) {
   // Crear un estado para cada campo del formulario
   const [nombre, setNombre] = useState('');
   const [existencia, setExistencia] = useState('');
   const [precio, setPrecio] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [porcentaje_alcohol, setPorcentaje_alcohol] = useState('');
-
-
-
   const [categorias, setcategorias] = useState([]);
-  const [idcategoria, setidcategoria] = useState(''); 
-
-
+  const [idcategoria, setidcategoria] = useState('');
   const [imagen, setImagen] = useState('');
 
   const handleImagenChange = (event) => {
-    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
-  
+    const file = event.target.files[0];
+
     const reader = new FileReader();
     reader.onload = () => {
-      const base64String = reader.result; // Obtener la imagen en formato base64
-      setImagen(base64String); // Puedes visualizar la imagen en base64 en la consola para asegurarte de que la conversión se hizo correctamente
-    }; 
+      const base64String = reader.result;
+      setImagen(base64String);
+    };
     if (file) {
-      reader.readAsDataURL(file); // Lee el contenido del archivo como base64
+      reader.readAsDataURL(file);
     }
   };
 
@@ -45,7 +39,7 @@ function Producto() {
       descripcion,
       porcentaje_alcohol,
       idcategoria,
-      imagen
+      imagen,
     };
 
     try {
@@ -69,7 +63,7 @@ function Producto() {
         setPorcentaje_alcohol('');
         setidcategoria('');
       } else {
-        alert('Error al registrar el producto');
+        alert('Asegurese de ingresar todos los datos del producto');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -78,42 +72,51 @@ function Producto() {
   };
 
   useEffect(() => {
-    // Realiza una solicitud a tu ruta para obtener las especialidades
+    // Realiza una solicitud a tu ruta para obtener las categorías
     fetch('http://localhost:5000/crud/readcategoria')
-      .then(response => response.json())
-      .then(data => {
-        // Actualiza el estado con las especialidades obtenidas
-        setcategorias(data);
+      .then((response) => response.json())
+      .then((data) => {
+        // Verifica si la respuesta es un array antes de actualizar el estado
+        if (Array.isArray(data)) {
+          setcategorias(data);
+        } else {
+          console.error('La respuesta de la API no es un array:', data);
+        }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al obtener las categorías.', error);
       });
   }, []);
 
-  return(
+  const handleNombreProductoChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoNombre = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setNombre(nuevoNombre);
+  };
+
+  return (
     <div>
-      <Header />
-      
+      <Header rol={rol} />
+
       <Container>
         <Card className="margen-contenedor">
           <Card.Body>
             <Card.Title>Registro de Productos</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>
               <Row className="g-3">
-
                 <Col sm="6" md="6" lg="6">
                   <FloatingLabel controlId="nombre" label="Nombre">
                     <Form.Control
                       type="text"
                       placeholder="Ingrese el nombre del producto"
                       value={nombre}
-                      onChange={(e) => setNombre(e.target.value)}
+                      onChange={handleNombreProductoChange}
                     />
                   </FloatingLabel>
                 </Col>
 
                 <Col sm="6" md="6" lg="6">
-                  <FloatingLabel controlId="existencia" label="existencia">
+                  <FloatingLabel controlId="existencia" label="Existencia">
                     <Form.Control
                       type="number"
                       placeholder="Ingrese la existencia"
@@ -125,20 +128,20 @@ function Producto() {
 
                 <Col sm="12" md="6" lg="6">
                   <FloatingLabel controlId="precio" label="Precio">
-                    <Form.Control 
-                      type="number" 
+                    <Form.Control
+                      type="number"
                       placeholder="Ingrese el precio"
                       value={precio}
-                      onChange={(e) => setPrecio(e.target.value)} 
+                      onChange={(e) => setPrecio(e.target.value)}
                     />
                   </FloatingLabel>
                 </Col>
 
                 <Col sm="12" md="12" lg="6">
                   <FloatingLabel controlId="porcentaje_alcohol" label="Porcentaje de alcohol">
-                    <Form.Control 
-                      type="number" 
-                      placeholder="Ingrese el porcentaje de alcohol" 
+                    <Form.Control
+                      type="number"
+                      placeholder="Ingrese el porcentaje de alcohol"
                       value={porcentaje_alcohol}
                       onChange={(e) => setPorcentaje_alcohol(e.target.value)}
                     />
@@ -147,43 +150,43 @@ function Producto() {
 
                 <Col sm="12" md="6" lg="12">
                   <FloatingLabel controlId="descripcion" label="Descripción">
-                    <Form.Control 
-                      type="text" 
-                      placeholder="Ingrese la descripcion"
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingrese la descripción"
                       value={descripcion}
-                      onChange={(e) => setDescripcion(e.target.value)} 
+                      onChange={(e) => setDescripcion(e.target.value)}
                     />
                   </FloatingLabel>
                 </Col>
 
                 <Col sm="12" md="6" lg="6">
-                  <FloatingLabel controlId="categoria" label="categorias">
+                  <FloatingLabel controlId="categoria" label="Categorías">
                     <Form.Select
-                      aria-label="categorias"
+                      aria-label="Categorías"
                       value={idcategoria}
                       onChange={(e) => setidcategoria(e.target.value)}
                     >
-                      <option>Seleccione la categoria</option>
-                      {categorias.map((categoria) => (
-                        <option key={categoria.idcategoria} value={categoria.idcategoria}>
-                          {categoria.nombre}
-                        </option>
-                      ))}
+                      <option>Seleccione la categoría</option>
+                      {Array.isArray(categorias) &&
+                        categorias.map((categoria) => (
+                          <option key={categoria.idcategoria} value={categoria.idcategoria}>
+                            {categoria.nombre}
+                          </option>
+                        ))}
                     </Form.Select>
                   </FloatingLabel>
                 </Col>
 
                 <Col sm="12" md="6" lg="6">
-                  <Form.Group controlId="imagen" className="" >
-                    <Form.Control 
-                      type="file" 
+                  <Form.Group controlId="imagen" className="">
+                    <Form.Control
+                      type="file"
                       accept=".jpg, .png, .jpeg"
                       size="lg"
                       onChange={handleImagenChange}
                     />
                   </Form.Group>
                 </Col>
-
               </Row>
               <div className="center-button">
                 <Button variant="primary" type="submit" className="mt-3" size="lg">
@@ -194,7 +197,6 @@ function Producto() {
           </Card.Body>
         </Card>
       </Container>
-
     </div>
   );
 }

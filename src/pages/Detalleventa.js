@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Detalleventa() {
+function Detalleventa({rol}) {
 
   // Crear un estado para cada campo del formulario
   const [cantidad, setCantidad] = useState('');
@@ -48,7 +48,7 @@ function Detalleventa() {
 
   return(
     <div>
-      <Header />
+      <Header rol={rol}/>
       
       <Container>
         <Card className="margen-contenedor">

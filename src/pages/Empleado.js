@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Empleado() {
+function Empleado({rol}) {
 
    // Crear un estado para cada campo del formulario
    const [nombre, setNombre] = useState('');
@@ -52,10 +52,23 @@ function Empleado() {
        alert('Error en la solicitud al servidor');
      }
    };
+
+   const handleNombreEmpleadoChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoNombre = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setNombre(nuevoNombre);
+  };
+
+  const handleApellidoEmpleadoChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoapellido = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setApellido(nuevoapellido);
+  };
+
  
    return(
      <div>
-       <Header />
+       <Header rol={rol}/>
        
        <Container>
          <Card className="margen-contenedor">
@@ -70,7 +83,7 @@ function Empleado() {
                        type="text"
                        placeholder="Ingrese el nombre"
                        value={nombre}
-                       onChange={(e) => setNombre(e.target.value)}
+                       onChange={handleNombreEmpleadoChange}
                      />
                    </FloatingLabel>
                  </Col>
@@ -81,7 +94,7 @@ function Empleado() {
                        type="text"
                        placeholder="Ingrese el apellido"
                        value={apellido}
-                       onChange={(e) => setApellido(e.target.value)}
+                       onChange={handleApellidoEmpleadoChange}
                      />
                    </FloatingLabel>
                  </Col>

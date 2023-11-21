@@ -3,7 +3,7 @@ import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  }
 import Header from '../components/Header';
 import { FaPencil, FaTrashCan } from 'react-icons/fa6';
 
-function DetalleventaList() {
+function DetalleventaList({rol}) {
   const [Detalleventas, setDetalleventa] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedDetalleventa, setSelectedDetalleventa] = useState({});
@@ -89,7 +89,7 @@ function DetalleventaList() {
 
   return (
     <div>
-      <Header />
+      <Header rol={rol}/>
 
       <Card className="margen-contenedor">
         <Card.Body>

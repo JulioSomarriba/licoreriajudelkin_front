@@ -15,7 +15,7 @@ function Header({ rol }) {
   return (
 
     <div>
-    {'admin' === 'admin' && (  
+    {rol === 'admin' && (  
     <div>
       {/* Navbar principal */}
       <Navbar className="navbar-color" variant="dark" expand="md" fixed='top'>
@@ -166,7 +166,7 @@ function Header({ rol }) {
       </Offcanvas>
     </div>)}
 
-    {'ventas' === 'ventas' && ( 
+    {rol === 'ventas' && ( 
 
           <div>
           {/* Navbar principal */}
@@ -184,6 +184,7 @@ function Header({ rol }) {
                   <Nav.Link>
                     <Link to="/" className="link-unstyled">Inicio</Link>
                   </Nav.Link>
+
 
                   <NavDropdown title="Productos" id="productos">
                     <NavDropdown.Item>
@@ -224,6 +225,10 @@ function Header({ rol }) {
                       <Link to="/CategoriaList" className="link-unstyled">Lista de categoria</Link>
                     </NavDropdown.Item>
                   </NavDropdown>
+
+                  <Nav.Link>
+                    <Link to="/" className="link-unstyled">Cerrar sesión</Link>
+                  </Nav.Link>
 
                 </Nav>
               </Navbar.Collapse>

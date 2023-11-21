@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Categoria() {
+function Categoria({rol}) {
 
   // Crear un estado para cada campo del formulario
   const [nombre, setnombre] = useState('');
@@ -33,7 +33,7 @@ function Categoria() {
         // Reiniciar los campos del formulario
         setnombre('');
       } else {
-        alert('Error al registrar la categoria');
+        alert('Asegurese de ingresar la categoria');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -41,12 +41,18 @@ function Categoria() {
     }
   };
 
+  const handleNombreCategoriaChange = (e) => {
+    // Validar que solo se ingresen letras
+    const nuevoNombre = e.target.value.replace(/[^a-zA-Z ]/g, ''); // Solo permite letras y espacios
+    setnombre(nuevoNombre);
+  };
+
   return(
     <div>
-      <Header />
+      <Header rol={rol} />
       
       <Container>
-        <Card className="mt-3">
+        <Card className="margen-contenedor">
           <Card.Body>
             <Card.Title>Registro de categoria</Card.Title>
             <Form className="mt-3" onSubmit={handleSubmit}>
@@ -58,7 +64,7 @@ function Categoria() {
                       type="text"
                       placeholder="Ingrese el nombre dela marca"
                       value={nombre}
-                      onChange={(e) => setnombre(e.target.value)}
+                      onChange={handleNombreCategoriaChange}
                     />
                   </FloatingLabel>
                 </Col>

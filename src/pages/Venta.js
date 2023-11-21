@@ -4,7 +4,7 @@ import { FaSearch, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function Venta() {
+function Venta({rol}) {
 
   const [formData, setFormData] = useState({
     idcliente: '',
@@ -208,7 +208,7 @@ function Venta() {
 
   return(
     <div>
-      <Header />
+      <Header rol={rol} />
       
       <Container className="margen-contenedor">
         <Card className="global-margin-top">
