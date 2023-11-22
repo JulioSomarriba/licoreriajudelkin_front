@@ -127,6 +127,17 @@ function Estadisticas({ rol }) {  // Declaración del componente Estadisticas co
                     <Card.Title>Estado del almacen</Card.Title>
                     <canvas id="myChart"  height="300"></canvas>
                   </Card.Body>
+
+                  <Col sm="4" md="4" lg="6">
+                <Card>  
+                  <Card.Body>
+                    <Button onClick={generarReporteAlmacenImg}>
+                      Generar reporte con imagen
+                    </Button>
+                  </Card.Body>
+    
+                </Card>
+              </Col>
     
                   <Card.Body>
                     <Button onClick={generarReporteAlmacen}>
@@ -137,20 +148,7 @@ function Estadisticas({ rol }) {  // Declaración del componente Estadisticas co
                 </Card>
               </Col>
     
-              <Col sm="6" md="6" lg="4">
-                <Card>
-                  <Card.Body>
-                    <Card.Title>Estado del almacen</Card.Title>
-                  </Card.Body>
-    
-                  <Card.Body>
-                    <Button onClick={generarReporteAlmacenImg}>
-                      Generar reporte con imagen
-                    </Button>
-                  </Card.Body>
-    
-                </Card>
-              </Col>
+             
     
             </Row>
           </Container>

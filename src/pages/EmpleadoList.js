@@ -96,7 +96,7 @@ function EmpleadoList({rol}) {
   return (
     <div>
       <Header rol={rol}/>
-
+      <Container>
       <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listado de Empleados</Card.Title>
@@ -218,7 +218,7 @@ function EmpleadoList({rol}) {
           </Button>
         </Modal.Footer>
       </Modal>
-
+      </Container>
     </div>
   );
 }

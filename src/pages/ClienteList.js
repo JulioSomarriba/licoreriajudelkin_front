@@ -130,7 +130,7 @@ function CLienteList({rol}) {
   return (
     <div>
       <Header rol={rol}/>
-
+      <Container>
       <Card className="margen-contenedor">
         <Card.Body>
           <Card.Title className="mb-3">Listado de clientes</Card.Title>
@@ -266,7 +266,7 @@ function CLienteList({rol}) {
           </Button>
         </Modal.Footer>
       </Modal>
-
+      </Container>
     </div>
   );
 }
